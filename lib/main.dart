@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tasks/task.dart';
-import 'package:tasks/task_controller.dart';
+import 'package:tasks/models/task.dart';
+import 'package:tasks/viewModels/task_controller.dart';
 
 void main() {
   runApp(ProviderScope(child: TasksApp()));

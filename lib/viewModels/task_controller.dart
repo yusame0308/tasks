@@ -1,8 +1,8 @@
 import 'package:state_notifier/state_notifier.dart';
-import 'package:tasks/task.dart';
+import 'package:tasks/models/task.dart';
 
 class TaskStateNotifier extends StateNotifier<Task> {
-  TaskStateNotifier(): super(Task(name: "", isDone: false));
+  TaskStateNotifier() : super(Task(name: "", isDone: false));
 
   void setName(String name) {
     state = state.copyWith(name: name);
