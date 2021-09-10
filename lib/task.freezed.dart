@@ -16,9 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$TaskTearOff {
   const _$TaskTearOff();
 
-  _Task call({required String name, required bool isDone, int? time}) {
+  _Task call(
+      {required String id, required String title, int isDone = 0, int? time}) {
     return _Task(
-      name: name,
+      id: id,
+      title: title,
       isDone: isDone,
       time: time,
     );
@@ -30,8 +32,9 @@ const $Task = _$TaskTearOff();
 
 /// @nodoc
 mixin _$Task {
-  String get name => throw _privateConstructorUsedError;
-  bool get isDone => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  int get isDone => throw _privateConstructorUsedError;
   int? get time => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,7 +45,7 @@ mixin _$Task {
 abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res>;
-  $Res call({String name, bool isDone, int? time});
+  $Res call({String id, String title, int isDone, int? time});
 }
 
 /// @nodoc
@@ -55,19 +58,24 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? name = freezed,
+    Object? id = freezed,
+    Object? title = freezed,
     Object? isDone = freezed,
     Object? time = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       isDone: isDone == freezed
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -81,7 +89,7 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   factory _$TaskCopyWith(_Task value, $Res Function(_Task) then) =
       __$TaskCopyWithImpl<$Res>;
   @override
-  $Res call({String name, bool isDone, int? time});
+  $Res call({String id, String title, int isDone, int? time});
 }
 
 /// @nodoc
@@ -95,19 +103,24 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
+    Object? id = freezed,
+    Object? title = freezed,
     Object? isDone = freezed,
     Object? time = freezed,
   }) {
     return _then(_Task(
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       isDone: isDone == freezed
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       time: time == freezed
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -119,19 +132,23 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Task extends _Task with DiagnosticableTreeMixin {
-  const _$_Task({required this.name, required this.isDone, this.time})
+  const _$_Task(
+      {required this.id, required this.title, this.isDone = 0, this.time})
       : super._();
 
   @override
-  final String name;
+  final String id;
   @override
-  final bool isDone;
+  final String title;
+  @JsonKey(defaultValue: 0)
+  @override
+  final int isDone;
   @override
   final int? time;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Task(name: $name, isDone: $isDone, time: $time)';
+    return 'Task(id: $id, title: $title, isDone: $isDone, time: $time)';
   }
 
   @override
@@ -139,7 +156,8 @@ class _$_Task extends _Task with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Task'))
-      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('isDone', isDone))
       ..add(DiagnosticsProperty('time', time));
   }
@@ -148,8 +166,10 @@ class _$_Task extends _Task with DiagnosticableTreeMixin {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Task &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.isDone, isDone) ||
                 const DeepCollectionEquality().equals(other.isDone, isDone)) &&
             (identical(other.time, time) ||
@@ -159,7 +179,8 @@ class _$_Task extends _Task with DiagnosticableTreeMixin {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(isDone) ^
       const DeepCollectionEquality().hash(time);
 
@@ -170,14 +191,19 @@ class _$_Task extends _Task with DiagnosticableTreeMixin {
 }
 
 abstract class _Task extends Task {
-  const factory _Task({required String name, required bool isDone, int? time}) =
-      _$_Task;
+  const factory _Task(
+      {required String id,
+      required String title,
+      int isDone,
+      int? time}) = _$_Task;
   const _Task._() : super._();
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   @override
-  bool get isDone => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  @override
+  int get isDone => throw _privateConstructorUsedError;
   @override
   int? get time => throw _privateConstructorUsedError;
   @override

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tasks/task.dart';
+import 'package:tasks/task_controller.dart';
 
 void main() {
-  runApp(TasksApp());
+  runApp(ProviderScope(child: TasksApp()));
 }
 
+final taskProvider = StateNotifierProvider<TaskStateNotifier, Task>(
+    (ref) => TaskStateNotifier());
 List<Task> tasks = [];
 
 class TasksApp extends StatelessWidget {
@@ -32,7 +37,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.blue,
         child: Icon(Icons.add),
         onPressed: () {
-          tasks.add(Task(name: "test", isDone: false));
+          tasks.add(Task(id: "id", title: "test"));
         },
       ),
       body: TaskList(),
@@ -40,12 +45,13 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class TaskList extends StatelessWidget {
+class TaskList extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final state = useProvider(taskProvider);
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
-        return Text(tasks[index].name);
+        return Text(state.title);
       },
       itemCount: tasks.length,
     );
