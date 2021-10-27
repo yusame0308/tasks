@@ -4,12 +4,11 @@ import 'package:flutter/foundation.dart';
 part 'task.freezed.dart';
 
 @freezed
-class Task with _$Task {
-  const Task._();
-  const factory Task({
-    required String id,
+abstract class Task with _$Task {
+  factory Task({
+    int? id,
     required String title,
-    @Default(0) int isDone,
-    int? time,
+    @JsonKey(name: 'is_done') @Default(false) bool isDone,
+    @Default(0) int minutes,
   }) = _Task;
 }

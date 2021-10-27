@@ -17,12 +17,15 @@ class _$TaskTearOff {
   const _$TaskTearOff();
 
   _Task call(
-      {required String id, required String title, int isDone = 0, int? time}) {
+      {int? id,
+      required String title,
+      @JsonKey(name: 'is_done') bool isDone = false,
+      int minutes = 0}) {
     return _Task(
       id: id,
       title: title,
       isDone: isDone,
-      time: time,
+      minutes: minutes,
     );
   }
 }
@@ -32,10 +35,11 @@ const $Task = _$TaskTearOff();
 
 /// @nodoc
 mixin _$Task {
-  String get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  int get isDone => throw _privateConstructorUsedError;
-  int? get time => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_done')
+  bool get isDone => throw _privateConstructorUsedError;
+  int get minutes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
@@ -45,7 +49,11 @@ mixin _$Task {
 abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res>;
-  $Res call({String id, String title, int isDone, int? time});
+  $Res call(
+      {int? id,
+      String title,
+      @JsonKey(name: 'is_done') bool isDone,
+      int minutes});
 }
 
 /// @nodoc
@@ -61,13 +69,13 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
     Object? id = freezed,
     Object? title = freezed,
     Object? isDone = freezed,
-    Object? time = freezed,
+    Object? minutes = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -75,11 +83,11 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
       isDone: isDone == freezed
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
+              as bool,
+      minutes: minutes == freezed
+          ? _value.minutes
+          : minutes // ignore: cast_nullable_to_non_nullable
               as int,
-      time: time == freezed
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -89,7 +97,11 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   factory _$TaskCopyWith(_Task value, $Res Function(_Task) then) =
       __$TaskCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String title, int isDone, int? time});
+  $Res call(
+      {int? id,
+      String title,
+      @JsonKey(name: 'is_done') bool isDone,
+      int minutes});
 }
 
 /// @nodoc
@@ -106,13 +118,13 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? isDone = freezed,
-    Object? time = freezed,
+    Object? minutes = freezed,
   }) {
     return _then(_Task(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -120,35 +132,38 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
       isDone: isDone == freezed
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
+              as bool,
+      minutes: minutes == freezed
+          ? _value.minutes
+          : minutes // ignore: cast_nullable_to_non_nullable
               as int,
-      time: time == freezed
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Task extends _Task with DiagnosticableTreeMixin {
-  const _$_Task(
-      {required this.id, required this.title, this.isDone = 0, this.time})
-      : super._();
+class _$_Task with DiagnosticableTreeMixin implements _Task {
+  _$_Task(
+      {this.id,
+      required this.title,
+      @JsonKey(name: 'is_done') this.isDone = false,
+      this.minutes = 0});
 
   @override
-  final String id;
+  final int? id;
   @override
   final String title;
+  @override
+  @JsonKey(name: 'is_done')
+  final bool isDone;
   @JsonKey(defaultValue: 0)
   @override
-  final int isDone;
-  @override
-  final int? time;
+  final int minutes;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Task(id: $id, title: $title, isDone: $isDone, time: $time)';
+    return 'Task(id: $id, title: $title, isDone: $isDone, minutes: $minutes)';
   }
 
   @override
@@ -159,7 +174,7 @@ class _$_Task extends _Task with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('isDone', isDone))
-      ..add(DiagnosticsProperty('time', time));
+      ..add(DiagnosticsProperty('minutes', minutes));
   }
 
   @override
@@ -172,8 +187,8 @@ class _$_Task extends _Task with DiagnosticableTreeMixin {
                 const DeepCollectionEquality().equals(other.title, title)) &&
             (identical(other.isDone, isDone) ||
                 const DeepCollectionEquality().equals(other.isDone, isDone)) &&
-            (identical(other.time, time) ||
-                const DeepCollectionEquality().equals(other.time, time)));
+            (identical(other.minutes, minutes) ||
+                const DeepCollectionEquality().equals(other.minutes, minutes)));
   }
 
   @override
@@ -182,7 +197,7 @@ class _$_Task extends _Task with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(isDone) ^
-      const DeepCollectionEquality().hash(time);
+      const DeepCollectionEquality().hash(minutes);
 
   @JsonKey(ignore: true)
   @override
@@ -190,22 +205,22 @@ class _$_Task extends _Task with DiagnosticableTreeMixin {
       __$TaskCopyWithImpl<_Task>(this, _$identity);
 }
 
-abstract class _Task extends Task {
-  const factory _Task(
-      {required String id,
+abstract class _Task implements Task {
+  factory _Task(
+      {int? id,
       required String title,
-      int isDone,
-      int? time}) = _$_Task;
-  const _Task._() : super._();
+      @JsonKey(name: 'is_done') bool isDone,
+      int minutes}) = _$_Task;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @override
   String get title => throw _privateConstructorUsedError;
   @override
-  int get isDone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_done')
+  bool get isDone => throw _privateConstructorUsedError;
   @override
-  int? get time => throw _privateConstructorUsedError;
+  int get minutes => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TaskCopyWith<_Task> get copyWith => throw _privateConstructorUsedError;
