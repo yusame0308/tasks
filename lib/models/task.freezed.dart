@@ -12,6 +12,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Task _$TaskFromJson(Map<String, dynamic> json) {
+  return _Task.fromJson(json);
+}
+
 /// @nodoc
 class _$TaskTearOff {
   const _$TaskTearOff();
@@ -28,6 +32,10 @@ class _$TaskTearOff {
       minutes: minutes,
     );
   }
+
+  Task fromJson(Map<String, Object> json) {
+    return Task.fromJson(json);
+  }
 }
 
 /// @nodoc
@@ -41,6 +49,7 @@ mixin _$Task {
   bool get isDone => throw _privateConstructorUsedError;
   int get minutes => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
 }
@@ -142,13 +151,16 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Task with DiagnosticableTreeMixin implements _Task {
-  _$_Task(
+  const _$_Task(
       {this.id,
       required this.title,
       @JsonKey(name: 'is_done') this.isDone = false,
       this.minutes = 0});
+
+  factory _$_Task.fromJson(Map<String, dynamic> json) =>
+      _$_$_TaskFromJson(json);
 
   @override
   final int? id;
@@ -203,14 +215,21 @@ class _$_Task with DiagnosticableTreeMixin implements _Task {
   @override
   _$TaskCopyWith<_Task> get copyWith =>
       __$TaskCopyWithImpl<_Task>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_TaskToJson(this);
+  }
 }
 
 abstract class _Task implements Task {
-  factory _Task(
+  const factory _Task(
       {int? id,
       required String title,
       @JsonKey(name: 'is_done') bool isDone,
       int minutes}) = _$_Task;
+
+  factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
 
   @override
   int? get id => throw _privateConstructorUsedError;
