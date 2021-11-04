@@ -9,7 +9,7 @@ class Task with _$Task {
   const factory Task({
     int? id,
     required String title,
-    @JsonKey(name: 'is_done') @Default(false) bool isDone,
+    @JsonKey(name: 'is_done') @Default(0) int isDone,
     @Default(0) int minutes,
   }) = _Task;
 

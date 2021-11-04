@@ -4,7 +4,8 @@ import 'package:tasks/models/task.dart';
 import 'package:tasks/repositories/task_repository.dart';
 import 'package:tasks/states/task_state.dart';
 
-final taskViewModelProvider = StateNotifierProvider(
+final taskViewModelProvider =
+    StateNotifierProvider<TaskViewModelProvider, TaskState>(
   (ref) => TaskViewModelProvider(
     ref.read,
     TaskRepository(TaskDatabase()),
@@ -58,7 +59,7 @@ class TaskViewModelProvider extends StateNotifier<TaskState> {
 
   Future<void> changeStatus(Task task) async {
     final newTask = task.copyWith(
-      isDone: !task.isDone,
+      isDone: task.isDone == 0 ? 1 : 0,
     );
 
     await _taskRepository.updateTask(newTask);

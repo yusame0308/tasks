@@ -23,7 +23,7 @@ class _$TaskTearOff {
   _Task call(
       {int? id,
       required String title,
-      @JsonKey(name: 'is_done') bool isDone = false,
+      @JsonKey(name: 'is_done') int isDone = 0,
       int minutes = 0}) {
     return _Task(
       id: id,
@@ -46,7 +46,7 @@ mixin _$Task {
   int? get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_done')
-  bool get isDone => throw _privateConstructorUsedError;
+  int get isDone => throw _privateConstructorUsedError;
   int get minutes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $TaskCopyWith<$Res> {
   $Res call(
       {int? id,
       String title,
-      @JsonKey(name: 'is_done') bool isDone,
+      @JsonKey(name: 'is_done') int isDone,
       int minutes});
 }
 
@@ -92,7 +92,7 @@ class _$TaskCopyWithImpl<$Res> implements $TaskCopyWith<$Res> {
       isDone: isDone == freezed
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       minutes: minutes == freezed
           ? _value.minutes
           : minutes // ignore: cast_nullable_to_non_nullable
@@ -109,7 +109,7 @@ abstract class _$TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
   $Res call(
       {int? id,
       String title,
-      @JsonKey(name: 'is_done') bool isDone,
+      @JsonKey(name: 'is_done') int isDone,
       int minutes});
 }
 
@@ -141,7 +141,7 @@ class __$TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res>
       isDone: isDone == freezed
           ? _value.isDone
           : isDone // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       minutes: minutes == freezed
           ? _value.minutes
           : minutes // ignore: cast_nullable_to_non_nullable
@@ -156,7 +156,7 @@ class _$_Task with DiagnosticableTreeMixin implements _Task {
   const _$_Task(
       {this.id,
       required this.title,
-      @JsonKey(name: 'is_done') this.isDone = false,
+      @JsonKey(name: 'is_done') this.isDone = 0,
       this.minutes = 0});
 
   factory _$_Task.fromJson(Map<String, dynamic> json) =>
@@ -168,7 +168,7 @@ class _$_Task with DiagnosticableTreeMixin implements _Task {
   final String title;
   @override
   @JsonKey(name: 'is_done')
-  final bool isDone;
+  final int isDone;
   @JsonKey(defaultValue: 0)
   @override
   final int minutes;
@@ -226,7 +226,7 @@ abstract class _Task implements Task {
   const factory _Task(
       {int? id,
       required String title,
-      @JsonKey(name: 'is_done') bool isDone,
+      @JsonKey(name: 'is_done') int isDone,
       int minutes}) = _$_Task;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
@@ -237,7 +237,7 @@ abstract class _Task implements Task {
   String get title => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'is_done')
-  bool get isDone => throw _privateConstructorUsedError;
+  int get isDone => throw _privateConstructorUsedError;
   @override
   int get minutes => throw _privateConstructorUsedError;
   @override
