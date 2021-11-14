@@ -55,8 +55,7 @@ class HomePage extends HookWidget {
     return Card(
       child: Slidable(
         child: CheckboxListTile(
-          // tileColor: Colors.deepOrangeAccent,
-          contentPadding: EdgeInsets.all(6.0),
+          contentPadding: EdgeInsets.fromLTRB(8.0, 8.0, 20.0, 8.0),
           title: Text(
             task.title,
             style: TextStyle(
@@ -64,6 +63,7 @@ class HomePage extends HookWidget {
                     ? TextDecoration.lineThrough
                     : TextDecoration.none),
           ),
+          secondary: Text((task.minutes ?? "").toString()),
           value: task.isDone == 1 ? true : false,
           onChanged: (value) {
             taskViewModel.changeStatus(task);

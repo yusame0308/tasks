@@ -11,7 +11,7 @@ _$_Task _$_$_TaskFromJson(Map<String, dynamic> json) {
     id: json['id'] as int?,
     title: json['title'] as String,
     isDone: json['is_done'] as int,
-    minutes: json['minutes'] as int? ?? 0,
+    minutes: json['minutes'] as int?,
   );
 }
 

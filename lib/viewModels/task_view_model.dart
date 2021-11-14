@@ -24,7 +24,7 @@ class TaskViewModelProvider extends StateNotifier<TaskState> {
   Future<void> addTask(String title, int? minutes) async {
     final task = await _taskRepository.addTask(Task(
       title: title,
-      minutes: minutes ?? 0,
+      minutes: minutes,
     ));
 
     state = state.copyWith(

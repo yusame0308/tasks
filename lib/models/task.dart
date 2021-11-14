@@ -10,7 +10,7 @@ class Task with _$Task {
     int? id,
     required String title,
     @JsonKey(name: 'is_done') @Default(0) int isDone,
-    @Default(0) int minutes,
+    int? minutes,
   }) = _Task;
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
