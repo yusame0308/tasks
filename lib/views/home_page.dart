@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tasks/models/task.dart';
 import 'package:tasks/viewModels/task_view_model.dart';
 
 class HomePage extends HookWidget {
@@ -9,7 +11,21 @@ class HomePage extends HookWidget {
     final taskViewModel = useProvider(taskViewModelProvider.notifier);
     return Scaffold(
       appBar: AppBar(),
-      body: _taskList(),
+      body: Column(
+        children: [
+          Container(
+            height: 100,
+            color: Colors.green,
+          ),
+          Flexible(
+            child: _taskList(),
+          ),
+          Container(
+            height: 100,
+            color: Colors.green,
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.edit),
         backgroundColor: Theme.of(context).primaryColor,
@@ -25,14 +41,51 @@ class HomePage extends HookWidget {
     final taskState = useProvider(taskViewModelProvider);
 
     return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 12.0),
       itemCount: taskState.tasks.length,
       itemBuilder: (BuildContext context, int index) {
         final task = taskState.tasks[index];
 
-        return ListTile(
-          title: Text(task.title),
-        );
+        return _taskItem(task, index, taskViewModel);
       },
+    );
+  }
+
+  Widget _taskItem(Task task, int index, TaskViewModelProvider taskViewModel) {
+    return Card(
+      child: Slidable(
+        child: CheckboxListTile(
+          // tileColor: Colors.deepOrangeAccent,
+          contentPadding: EdgeInsets.all(6.0),
+          title: Text(
+            task.title,
+            style: TextStyle(
+                decoration: task.isDone == 1
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none),
+          ),
+          value: task.isDone == 1 ? true : false,
+          onChanged: (value) {
+            taskViewModel.changeStatus(task);
+          },
+          controlAffinity: ListTileControlAffinity.leading,
+        ),
+        endActionPane: ActionPane(
+          extentRatio: 0.3,
+          motion: ScrollMotion(),
+          children: [
+            SlidableAction(
+              flex: 1,
+              label: '削除',
+              backgroundColor: Colors.red,
+              icon: Icons.delete,
+              onPressed: (context) async {
+                await taskViewModel.deleteTask(task.id!);
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
