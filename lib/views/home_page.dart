@@ -13,25 +13,42 @@ class HomePage extends HookWidget {
       appBar: AppBar(),
       body: Column(
         children: [
-          Container(
-            height: 100,
-            color: Colors.green,
-          ),
           Flexible(
             child: _taskList(),
           ),
           Container(
+            width: double.infinity,
             height: 100,
-            color: Colors.green,
+            padding: EdgeInsets.fromLTRB(30, 0, 30, 20),
+            color: Colors.teal,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "7個  125分",
+                    style: TextStyle(
+                      color: Colors.grey[300],
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: FloatingActionButton(
+                    child: const Icon(Icons.edit),
+                    backgroundColor: Colors.teal[400],
+                    foregroundColor: Colors.grey[300],
+                    onPressed: () async {
+                      await taskViewModel.addTask("test", null);
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.edit),
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () async {
-          await taskViewModel.addTask("test", null);
-        },
       ),
     );
   }
