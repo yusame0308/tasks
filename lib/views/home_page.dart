@@ -8,7 +8,6 @@ import 'package:tasks/viewModels/task_view_model.dart';
 class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final taskViewModel = useProvider(taskViewModelProvider.notifier);
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -16,36 +15,42 @@ class HomePage extends HookWidget {
           Flexible(
             child: _taskList(),
           ),
-          Container(
-            width: double.infinity,
-            height: 100,
-            padding: EdgeInsets.fromLTRB(30, 0, 30, 20),
-            color: Colors.teal,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "7個  125分",
-                    style: TextStyle(
-                      color: Colors.grey[300],
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: FloatingActionButton(
-                    child: const Icon(Icons.edit),
-                    backgroundColor: Colors.teal[400],
-                    foregroundColor: Colors.grey[300],
-                    onPressed: () async {
-                      await taskViewModel.addTask("test", null);
-                    },
-                  ),
-                ),
-              ],
+          _footer()
+        ],
+      ),
+    );
+  }
+
+  Widget _footer() {
+    final taskViewModel = useProvider(taskViewModelProvider.notifier);
+
+    return Container(
+      width: double.infinity,
+      height: 100,
+      padding: EdgeInsets.fromLTRB(30, 0, 30, 20),
+      color: Colors.teal,
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              "7個  125分",
+              style: TextStyle(
+                color: Colors.grey[300],
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FloatingActionButton(
+              child: const Icon(Icons.edit),
+              backgroundColor: Colors.teal[400],
+              foregroundColor: Colors.grey[300],
+              onPressed: () async {
+                await taskViewModel.addTask("test", null);
+              },
             ),
           ),
         ],
