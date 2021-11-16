@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tasks/models/task.dart';
 import 'package:tasks/viewModels/task_view_model.dart';
+import 'package:tasks/views/upsert_dialog.dart';
 
 class HomePage extends HookWidget {
   @override
@@ -15,15 +16,13 @@ class HomePage extends HookWidget {
           Flexible(
             child: _taskList(),
           ),
-          _footer()
+          _footer(context)
         ],
       ),
     );
   }
 
-  Widget _footer() {
-    final taskViewModel = useProvider(taskViewModelProvider.notifier);
-
+  Widget _footer(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 100,
@@ -48,8 +47,13 @@ class HomePage extends HookWidget {
               child: const Icon(Icons.edit),
               backgroundColor: Colors.teal[400],
               foregroundColor: Colors.grey[300],
-              onPressed: () async {
-                await taskViewModel.addTask("test", null);
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return UpsertDialog();
+                  },
+                );
               },
             ),
           ),
