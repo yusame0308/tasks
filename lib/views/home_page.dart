@@ -10,6 +10,7 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: Column(
         children: [
@@ -49,6 +50,8 @@ class HomePage extends HookWidget {
               foregroundColor: Colors.grey[300],
               onPressed: () {
                 showDialog(
+                  useSafeArea: false,
+                  barrierDismissible: false,
                   context: context,
                   builder: (BuildContext context) {
                     return UpsertDialog();
