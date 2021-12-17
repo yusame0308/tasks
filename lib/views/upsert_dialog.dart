@@ -55,7 +55,7 @@ class UpsertDialog extends HookWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    // TODO: DBに追加
+                    taskViewModel.addTask(titleController.text, int.tryParse(minutesController.text));
                   },
                   child: Text('追加'),
                 ),
