@@ -51,7 +51,7 @@ class HomePage extends HookWidget {
               onPressed: () {
                 showDialog(
                   useSafeArea: false,
-                  // barrierDismissible: false,
+                  barrierDismissible: false,
                   context: context,
                   builder: (BuildContext context) {
                     return UpsertDialog();
